@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IdeaController;
 use Illuminate\Support\Facades\Route;
@@ -19,4 +20,5 @@ Route::get('/', [DashboardController::class, 'index'])->name('index');
 
 Route::resource('idea', IdeaController::class);
 
+Route::resource('ideas.comments', CommentController::class);
 

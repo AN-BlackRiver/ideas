@@ -8,6 +8,7 @@
 
         <div class="col-6">
                 @include('shared.update-message')
+                @include('shared.success-message')
                 <div class="">
                     @include('shared.idea-card')
                 </div>
