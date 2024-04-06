@@ -3,30 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Idea\StoreRequest;
+use App\Http\Requests\Idea\UpdateRequest;
 use App\Models\Idea;
-use Illuminate\Http\Request;
 
 class IdeaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreRequest $request)
     {
 
@@ -35,35 +26,32 @@ class IdeaController extends Controller
         return redirect()->route('index')->with('success', 'Мысль успешно добавлена');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Idea $idea)
     {
-        //
+        return view('idea.show', compact('idea'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(Idea $idea)
     {
-        //
+        $editing = true;
+        return view('idea.show', compact('idea','editing'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(UpdateRequest $request, Idea $idea)
     {
-        //
+        if ($request->validated('content') == $idea->content){
+            return redirect()->route('idea.show', $idea->id);
+        };
+
+        $idea->update($request->validated());
+        return redirect()->route('idea.show', $idea->id)->with('update', 'Мысль успешно обновлена');
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Idea $idea)
     {
-        //
+        $idea->delete();
+
+        return redirect()->route('index')->with('destroy', 'Мысль удалена');
     }
 }
