@@ -8,15 +8,22 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/login">Войти</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/register">Регистрация</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/profile">Профиль</a>
-                </li>
+                @guest()
+                    <li class="nav-item">
+                        <a class="nav-link @if(strpos(request()->url(), 'login')) active @endif"  href="{{route('login')}}">Войти</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @if(strpos(request()->url(), 'register')) active @endif"  href="{{route('register')}}">Регистрация</a>
+                    </li>
+                @endguest
+                @auth()
+                    <li class="nav-item">
+                        <a class="nav-link @if(strpos(request()->url(), 'profile')) active @endif" href="/profile">{{Auth::user()->name}}</a>
+                    </li>
+                    <li class="nav-item">
+                            <a class="nav-link" href="{{route('logout')}}">Выход</a>
+                    </li>
+                @endauth
             </ul>
         </div>
     </div>

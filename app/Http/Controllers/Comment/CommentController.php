@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Comment;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Comment\StoreRequest;
 use App\Models\Comment;
 use App\Models\Idea;
@@ -30,10 +31,7 @@ class CommentController extends Controller
      */
     public function store(Idea $idea, StoreRequest $request)
     {
-        $comment = new Comment();
-        $comment->idea_id = $idea->id;
-        $comment->body = $request->body;
-        $comment->save();
+        $idea->comments()->create($request->validated());
 
         return redirect()->route('idea.show', $idea->id)->with('success', 'Комментарий успешно добавлен');
     }

@@ -30,7 +30,7 @@ return [
         'array'   => 'Поле :attribute должно содержать :min - :max элементов.',
     ],
     'boolean'              => 'Поле :attribute должно быть логической истинной или ложью.',
-    'confirmed'            => 'Поле :attribute не совпадает с подтверждением.',
+    'confirmed'            => 'Подтверждение пароля не совпадает.',
     'date'                 => 'Поле :attribute не является датой.',
     'date_format'          => 'Поле :attribute не соответствует формату :format.',
     'different'            => 'Поля :attribute и :other должны различаться.',

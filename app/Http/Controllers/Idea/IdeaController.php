@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Idea;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Idea\StoreRequest;
 use App\Http\Requests\Idea\UpdateRequest;
 use App\Models\Idea;
@@ -20,7 +21,6 @@ class IdeaController extends Controller
 
     public function store(StoreRequest $request)
     {
-
         Idea::query()->create($request->validated());
 
         return redirect()->route('index')->with('success', 'Мысль успешно добавлена');
@@ -34,12 +34,12 @@ class IdeaController extends Controller
     public function edit(Idea $idea)
     {
         $editing = true;
-        return view('idea.show', compact('idea','editing'));
+        return view('idea.show', compact('idea', 'editing'));
     }
 
     public function update(UpdateRequest $request, Idea $idea)
     {
-        if ($request->validated('content') == $idea->content){
+        if ($request->validated('content') == $idea->content) {
             return redirect()->route('idea.show', $idea->id);
         };
 
