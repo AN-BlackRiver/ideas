@@ -31,9 +31,11 @@ class CommentController extends Controller
      */
     public function store(Idea $idea, StoreRequest $request)
     {
-        $idea->comments()->create($request->validated());
+        $validatedData = $request->validated();
+        $validatedData['user_id'] = auth()->id();
+        $idea->comments()->create($validatedData);
 
-        return redirect()->route('idea.show', $idea->id)->with('success', 'Комментарий успешно добавлен');
+        return redirect()->route('ideas.show', $idea->id)->with('success', 'Комментарий успешно добавлен');
     }
 
     /**

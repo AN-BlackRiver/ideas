@@ -8,8 +8,9 @@
 
         <div class="col-6">
             @include('shared.message-box')
-
-            @include('shared.submit-idea')
+            <div class="">
+                @include('shared.profile-card')
+            </div>
             <hr>
             @forelse($ideas as $idea)
                 <div class="mt-3">

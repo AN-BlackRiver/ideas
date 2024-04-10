@@ -18,10 +18,10 @@
                 @endguest
                 @auth()
                     <li class="nav-item">
-                        <a class="nav-link @if(strpos(request()->url(), 'profile')) active @endif" href="/profile">{{Auth::user()->name}}</a>
+                        <a class="nav-link @if(strpos(request()->url(), 'profile')) active @endif" href="{{route('users.show',auth()->id())}}">{{auth()->user()->name}}</a>
                     </li>
                     <li class="nav-item">
-                            <a class="nav-link" href="{{route('logout')}}">Выход</a>
+                            <a class="btn btn-secondary" href="{{route('logout')}}">Выход</a>
                     </li>
                 @endauth
             </ul>
